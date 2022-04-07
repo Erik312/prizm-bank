@@ -44,3 +44,6 @@ def create_app():
         return response
 
     return app
+
+
+my_app = create_app()
