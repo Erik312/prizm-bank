@@ -1,1 +1,1 @@
-web: gunicorn prizm:create_app
+web: gunicorn prizm:create_app()
