@@ -38,7 +38,7 @@ def create_app():
     @app.after_request
     def prepare_response(response):
         response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
-        response.headers['Content-Security-Policy'] = "default-src: 'self'; style-src: https://maxcdn.bootstrapcdn.com"
+        response.headers['Content-Security-Policy'] = "default-src: 'self'; style-src: https://maxcdn.bootstrapcdn.com;"
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['X-Frame-Options'] = 'SAMEORIGIN'
         return response
