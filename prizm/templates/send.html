@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prizm</title>
+	<!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/static/css/send.css">
+
+</head>
+<body>
+
+
+	<!-- nav -->
+	<nav class="container-fluid" id="nav-section">
+		<a id="home-link" href="/">
+		<ion-icon id="ion-logo" name="triangle-outline"></ion-icon>
+		</a>
+		<p id="nav-title">Prizm</p>
+		<a href="{{ url_for('auth.logout') }}"><button class="nav-button">logout</button></a>
+	</nav>
+
+
+	{% with messages = get_flashed_messages()%}
+			{% if messages %}
+				{% for message in messages %}
+					<div id="flash-container" class="alert alert-warning">
+
+
+						{{message}}
+					<i class="close-icon" onclick="delete_message()">x</i>
+
+					</div>
+
+
+				{% endfor %}
+			{% endif %}
+		 {% endwith %}
+
+	<div class="container-fluid text-center">
+
+		<a href="{{ url_for('user.history_page') }}"><button class="btn btn-dark main-menu-button">Transaction history</button></a>
+		<a href="{{ url_for('user.send') }}"><button class="btn btn-dark main-menu-button">send/deposit</button></a>
+		<a href="{{ url_for('user.account_settings') }}"><button class="btn btn-dark main-menu-button">account settings</button></a>
+
+	</div>
+
+	<div class="container-fluid" id="user-data-section">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Send or Deposit:</h3>
+			</div>
+
+
+	</div>
+	</div>
+
+
+	<div class="container-fluid" id="main-content-section">
+
+			<button class="btn btn-dark mx-auto d-block action-bronson-button" onclick="send_form()">Send</button>
+			<button class="btn btn-dark mx-auto d-block action-bronson-button" onclick="deposit_form()">Deposit</button>
+
+
+
+
+	</div>
+
+
+
+	<!-- foooter content -->
+	<div id="footer-section" class="container-fluid text-center">
+
+		<p>E</p>
+
+	</div>
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script type="text/javascript">
+
+	var main_content = document.getElementById("main-content-section")
+
+	function delete_message(){
+		let close_element= document.getElementById("flash-container")
+		close_element.remove()
+
+	}
+
+
+	function send_form(){
+		main_content.innerHTML = '';
+		main_content.innerHTML='<button class="btn btn-dark back-button" onclick="go_back_button()">back</button><div class="card"><div class="card-body text-center"><form action="{{ url_for('user.send_to_user') }}" method="POST"><input type="hidden" name="csrf_token" value="{{csrf_token()}}"><label for="recipient">Who would you like to send money to: </label><input class="form-inputs" type="text" name="recipient" placeholder="Recipient Email"><label for="amount">Enter amount to send: </label><input class="form-inputs" type="text" name="amount" placeholder="$ Amount"><button type="submit" class="btn btn-dark">Send</button></form></div></div>'
+	}
+
+	function deposit_form(){
+		main_content.innerHTML='';
+		main_content.innerHTML='<button class="btn btn-dark back-button" onclick="go_back_button()">back</button><div class="card"><div class="card-body text-center"><form action="{{ url_for('user.deposit') }}" method="POST"><input type="hidden" name="csrf_token" value="{{csrf_token()}}"><select name="cards" id="card-select"><option>Card1</option><option>Card2</option><option>Card3</option></select><input class="form-inputs" type="text" name="amount" placeholder="$ Amount"><button class="btn btn-dark">Deposit</button></form></div></div>'
+	};
+
+	function go_back_button(){
+		main_content.innerHTML='';
+		main_content.innerHTML='<button class="btn btn-dark mx-auto d-block action-bronson-button" onclick="send_form()"">Send</button><button class="btn btn-dark mx-auto d-block action-bronson-button" onclick="deposit_form()"">Deposit</button>';
+	}
+
+</script>
+
+</body>
+</html>
