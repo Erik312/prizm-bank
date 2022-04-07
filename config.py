@@ -9,7 +9,7 @@ class ProductionConfig():
     """Flask Configuration"""
     SECRET_KEY = environ.get('SECRET_KEY')
     #connect to db
-    SQLALCHEMY_DATABASE_URI= environ.get('SQLALCHEMY_DATABASE_URI', '').replace(
+    SQLALCHEMY_DATABASE_URI= environ.get('SQLALCHEMY_DATABASE_URI').replace(
         'postgres://', 'postgresql://')
 
 
