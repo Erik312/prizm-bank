@@ -63,6 +63,7 @@
 	<div class="container-fluid">
 
 		<form class="account-form text-center" action="{{ url_for('user.account_settings') }}" method="POST">
+			<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
 			<p>name: {{user_data[0]}}</p>
 			<p>email: {{user_data[1]}}</p>
 			<p>account_number: {{user_data[2]}}</p>
