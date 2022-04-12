@@ -109,7 +109,7 @@ def account_settings():
                 db.session.commit()
                 session.clear()
                 flash("Successfully deleted acccount")
-                return redirect(url_for('/'))
+                return redirect(url_for('auth.login'))
             except:
                 flash("An error occured")
                 return redirect(url_for('user.account_settings'))
