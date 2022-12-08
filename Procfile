@@ -1,1 +1,0 @@
-web: gunicorn prizm:my_app
